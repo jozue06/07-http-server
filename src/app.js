@@ -3,6 +3,7 @@
 
 // 1st Party library
 const http = require('http');
+const cowsay = require('cowsay');
 
 // Local Libraries
 // parser will tear the URL apart and give us back an object with things like path, query params, etc.
@@ -20,11 +21,11 @@ const requestHandler = (req,res) => {
   parser(req)
     .then( req => {
 
-      /* The "if" statements below are our "routes" and do the same things that express does (below) but 100% manually
-           app.get('/', (req,res) => res.send('Hello From the Gutter'));
-           app.get('/foo/bar/baz', (req,res) => res.send('Hello From the Gutter'));
-      */
-      if ( req.method === 'GET' && req.url.pathname === '/' ) {
+      //The "if" statements below are our "routes" and do the same things that express does (below) but 100% manually
+      // app.get('/', (req,res) => res.send('Hello From the Gutter'));
+      // app.get('/foo', (req,res) => res.send('Hello From the Gutter'));
+      
+      if ( req.method === 'GET' && req.url.pathname === '/cowsay' ) {
         res.setHeader('Content-Type', 'text/html');
         res.statusCode = 200;
         res.statusMessage = 'OK';
@@ -32,10 +33,10 @@ const requestHandler = (req,res) => {
         // Send out some random HTML (actually, it's not totally random. Note how it includes req.url.query.you ...
         // That would show whatever you have in the URL after you = (http://localhost:3000?this=that&you=cool
 
-        let message = req.url.query.you;
+        let message = req.url.query.cowsay;
 
-        // message = "Hola";
-
+        // message = 'Hola';
+        // res.cowsay.say(message);
         res.write(`<!DOCTYPE html><html><body><h1>${message}</h1></body></html>`);
         // ... Instead of doing manual HTML like that, you could have used the "fs" module to read a file
         // and "res.write()" the contents of that file.
