@@ -28,9 +28,9 @@ const requestHandler = (req,res) => {
           res.end();
         });
       }
-      else if ( req.method === 'GET' && req.url.pathname === '/cowsay' ) {
+      else if ( req.method === 'GET' && req.url.pathname === '/api/cowsay' ) {
         fs.readFile(`${__dirname}/../public/cowsay.html`, (err, data) =>{
-          if(err) { return err;}
+          if(err) { return errPage();}
           let html = data.toString();
           let text = cowsay.say({text: req.url.query.text});
           res.setHeader('Content-Type', 'text/html');
@@ -40,15 +40,15 @@ const requestHandler = (req,res) => {
           res.end();
         });
       }
-      else if ( req.method === 'POST' && req.url.pathname === '/cowsay' ) {
-        fs.readFile(`${__dirname}/../public/.html`, (err, data) => {
-          if(err) { return err;}
-          let content = '';
-          if(!req.body) { content = 'Erorr';}
+      else if ( req.method === 'POST' && req.url.pathname === '/api/cowsay' ) {
+        fs.readFile(`${__dirname}/../public/cowsay.html`, (err, data) => {
+          if(err) { return errPage();}
+          let content = data;
+          if(! req.body ) { content = 'Erorr';}
           else if (req.body.text) {content = cowsay.say({text: req.url.query.text});}
           else{ content = 'Erorr';}
 
-          let obj = {content: content};
+          let obj = {content : content};
           res.setHeader('Content-Type', 'text/json');
           res.statusCode = 200;
           res.statusMessage = 'OK';
