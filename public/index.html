@@ -6,15 +6,19 @@
   <body>
    <header>
      <nav>
-       <ul> 
-         <li><a href="/cowsay">cowsay</a></li>
-       </ul>
+       <form action="/cowsay" method="get">
+        <input name='text' placeholder=" Type some stuff for the cow">
+      </form>
      </nav>
    <header>
    <main>
-     <!-- project description -->
 
-     <h1> cowsayalskjd </h1>
+
+     <h1> cowsay </h1>
+     Type some shit
+    <pre>
+      {{cowsay}}
+    </pre>
    </main>
   </body>
 </html>
