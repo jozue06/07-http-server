@@ -20,14 +20,15 @@ module.exports = (req) => {
     }
 
     let text = '';
-
+    console.log('text 1 ', text);
     req.on('data', (buffer) => {
       text += buffer.toString();
     });
-
+    console.log('text 2 ', text);
     req.on('end', () => {
       try{
-        req.body = JSON.parse(text);
+        req.body = text;
+        console.log('text 3 ', req.body);
         resolve(req);
       }
       catch(err) { reject(err); }

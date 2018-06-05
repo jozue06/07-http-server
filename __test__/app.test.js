@@ -43,12 +43,12 @@ describe('Simple Web Server', () => {
 
   });
 
-  xit('handles a good post request', () => {
+  it('handles a good post request', () => {
     let obj = {text: 'Fred'};
     let expected = JSON.stringify(obj);
     console.log(obj);
     console.log(expected);
-    return superagent.post('http://localhost:3000')
+    return superagent.post('http://localhost:3000/api/cowsay')
       .send(obj)
       .then(response => {
         expect(response.text).toBe(expected);

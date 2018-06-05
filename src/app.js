@@ -44,15 +44,18 @@ const requestHandler = (req,res) => {
         fs.readFile(`${__dirname}/../public/cowsay.html`, (err, data) => {
           if(err) { return errPage();}
           let content = data;
-          if(! req.body ) { content = 'Erorr';}
-          else if (req.body.text) {content = cowsay.say({text: req.url.query.text});}
-          else{ content = 'Erorr';}
+          if(!req.body ) { content = 'Erorrs';}
+          else if (req.body) 
+            content = {text: req.body};
+          
+          else{ content = 'Erorrss';}
 
           let obj = {content : content};
           res.setHeader('Content-Type', 'text/json');
           res.statusCode = 200;
           res.statusMessage = 'OK';
-          res.write( JSON.stringify(obj) );
+          res.write( JSON.stringify(obj));
+          console.log(obj);
           res.end();
         });       
       }
