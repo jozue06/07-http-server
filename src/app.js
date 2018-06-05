@@ -46,7 +46,7 @@ const requestHandler = (req,res) => {
           let content = data;
           if(!req.body ) { content = 'Erorrs';}
           else if (req.body) 
-            content = {text: req.body};
+            content = req.body;
           
           else{ content = 'Erorrss';}
 
